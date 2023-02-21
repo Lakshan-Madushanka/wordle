@@ -8,11 +8,34 @@ import axios from 'axios';
 import Alpine from 'alpinejs'
 
 window.Alpine = Alpine
+document.addEventListener('alpine:init', () => {
+    Alpine.data('currentGuess', () => ({
+        guess: [],
+
+        inputKey($key) {
+            if ($key === 'Backspace') {
+                this.guess.pop();
+                return;
+            }
+            const validLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+            $key = $key.toLowerCase();
+
+            if (validLetters.includes($key) && this.guess.length < 5) {
+                this.guess.push($key)
+            }
+
+           // alert('hueee '+ $key)
+
+        },
+    }))
+})
+
 Alpine.start()
 
 window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
