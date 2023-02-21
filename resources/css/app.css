@@ -12,7 +12,7 @@
     @apply text-white;
 }
 
-.absent {
+.absence {
     @apply bg-red-400;
     @apply text-white;
 }
