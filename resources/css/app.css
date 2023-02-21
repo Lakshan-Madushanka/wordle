@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.correct {
+    @apply bg-green-400;
+    @apply text-white;
+}
+
+.present {
+    @apply bg-yellow-400;
+    @apply text-white;
+}
+
+.absent {
+    @apply bg-red-400;
+    @apply text-white;
+}
+
