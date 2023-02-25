@@ -2,9 +2,12 @@
 
 namespace App\Enums;
 
-enum LetterStatus: string
+use Livewire\Wireable;
+
+class LetterStatus
 {
-    case CORRECT  = 'correct';
-    case PRESENT  = 'present';
-    case ABSENCE  = 'absence';
+    public const CORRECT  = 'correct';
+    public const PRESENT  = 'present';
+    public const ABSENCE  = 'absence';
+
 }

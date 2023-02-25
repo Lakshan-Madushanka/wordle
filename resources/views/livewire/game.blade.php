@@ -1,4 +1,5 @@
-<div class="h-screen">
+@php use App\Enums\GameStatus; @endphp
+<div>
     <header class="flex justify-between items-center p-4 border-b-2 border-gray-300">
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -13,8 +14,8 @@
         </div>
 
         <div class="flex">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                 stroke="currentColor" class="w-6 h-6">
+            <svg x-data @click="$dispatch('display-stats')"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor" class="w-6 h-6 hover:cursor-pointer">
                 <path stroke-linecap="round" stroke-linejoin="round"
                       d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
             </svg>
@@ -27,17 +28,42 @@
         </div>
     </header>
 
-    <div class="flex flex-col space-y-4 justify-center items-center h-[calc(100%-74px)]">
+    <div class="flex flex-col space-y-4 justify-center items-center">
+        <div @class([
+                 "mt-4",
+                 "py-2",
+                 "px-8",
+                 "bg-pink-600",
+                 "text-white",
+                 "uppercase",
+                 "h-10",
+                 "invisible" => $status === GameStatus::ACTIVE,
+           ])>
+            @if($status === GameStatus::LOST)
+                {{$word}}
+            @elseif($status === GameStatus::WON)
+                Genius
+            @endif
+        </div>
+
         @foreach($guesses as $guess)
             <x-row.past :guess="$guess"/>
         @endforeach
 
         @if(count($guesses) < 6)
-            <x-row.present/>
+            @if($status === GameStatus::ACTIVE)
+                <x-row.present/>
+            @else
+                <x-row.future/>
+            @endif
         @endif
 
         @for($i = count($guesses); $i < 5; $i++)
             <x-row.future/>
         @endfor
+
+        @include('includes.keyboard', ['keyStatusses' => $keyStatusses])
     </div>
+
+    <x-stats/>
 </div>

@@ -2,9 +2,9 @@
 
 namespace App\Enums;
 
-Enum GameStatus: string
+class GameStatus
 {
-    case ACTIVE = 'active';
-    case WON = 'won';
-    case LOST = 'lost';
+    public  const ACTIVE = 'active';
+    public  const WON = 'won';
+    public  const LOST = 'lost';
 }
