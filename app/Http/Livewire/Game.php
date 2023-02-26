@@ -4,15 +4,17 @@ namespace App\Http\Livewire;
 
 use App\Enums\GameStatus;
 use App\Enums\LetterStatus;
+use App\Support\WordGenerators\WordGenerator;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\App;
 use Livewire\Component;
 
 class Game extends Component
 {
     public array $guesses = [];
-    public string $word = 'world';
+    public string $word;
     public string $status;
     public array $keyStatuses = [];
 
@@ -21,6 +23,10 @@ class Game extends Component
     public function mount()
     {
         $this->status = GameStatus::ACTIVE;
+
+        /** @var WordGenerator $wodGenerator */
+        $wodGenerator = App::make(WordGenerator::class) ;
+        $this->word = $wodGenerator->generate(6);
     }
 
     public function submitGuess(array $guess): void
