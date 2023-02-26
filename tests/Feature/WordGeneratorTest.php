@@ -16,3 +16,11 @@ it('can generate a random word with a given length', function () {
 
     expect(strlen($wordGenerator->generate($length)))->toBe($length);
 });
+
+it('generate a lowercase word', function () {
+    /** @var WordGenerator $wordGenerator */
+    $wordGenerator = $this->app->make(WordGenerator::class);
+    $word = $wordGenerator->generate();
+
+    expect($word)->toBe(strtolower($word));
+});

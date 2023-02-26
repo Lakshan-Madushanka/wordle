@@ -26,7 +26,7 @@ class Game extends Component
 
         /** @var WordGenerator $wodGenerator */
         $wodGenerator = App::make(WordGenerator::class) ;
-        $this->word = $wodGenerator->generate(6);
+        $this->word = $wodGenerator->generate(5);
     }
 
     public function submitGuess(array $guess): void

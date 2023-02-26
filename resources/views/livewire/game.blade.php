@@ -39,8 +39,6 @@
         </div>
     </header>
 
-    <div>{{$word}}</div>
-
     <div class="flex flex-col space-y-4 justify-center items-center">
         <div @class([
                  "mt-4",

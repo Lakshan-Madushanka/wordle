@@ -40,13 +40,15 @@ class RyanrkWordGenerator implements WordGenerator
     {
     }
 
-    public function generate(int $length = 6): string
+    public function generate(int $length = 5): string
     {
         $word = Http::timeout(5)->withUrlParameters([
             'endPoint' => self::URL,
             'language' => $this->language,
             'length' => $length,
         ])->get('{+endPoint}/{language}/word/random{?length}')->json()[0];
+
+        $word = strtolower($word);
 
         while (! $this->validateWord($word)) {
             $this->generate(6);
