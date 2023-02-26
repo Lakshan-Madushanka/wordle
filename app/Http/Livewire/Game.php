@@ -14,7 +14,7 @@ class Game extends Component
     public array $guesses = [];
     public string $word = 'world';
     public string $status;
-    public array $keyStatusses = [];
+    public array $keyStatuses = [];
 
     protected $listeners = ['submitGuess'];
 
@@ -25,6 +25,7 @@ class Game extends Component
 
     public function submitGuess(array $guess): void
     {
+
         if (count($this->guesses) === 6 | $this->status !== GameStatus::ACTIVE) {
             return;
         }
@@ -32,6 +33,8 @@ class Game extends Component
         $word = str_split($this->word);
 
         if ($guess === $word) {
+            $this->dispatchBrowserEvent('played', ['status' => 'won', 'guessRow' => count($this->guesses)]);
+
             $this->status = GameStatus::WON;
         }
 
@@ -39,7 +42,7 @@ class Game extends Component
         $this->guesses[] = collect($guess)->map(function ($letter, $index) use (&$word) {
             // Check letter contains in the correct position of the word
             if ($letter === $word[$index]) {
-                $this->keyStatusses[$letter] = LetterStatus::CORRECT;
+                $this->keyStatuses[$letter] = LetterStatus::CORRECT;
                 return [
                     'letter' => $letter,
                     'status' => LetterStatus::CORRECT,
@@ -48,14 +51,14 @@ class Game extends Component
 
             // Check letter contains in word (incorrect position)
             if (in_array($letter, $word, true)) {
-                $this->keyStatusses[$letter] = LetterStatus::PRESENT;
+                $this->keyStatuses[$letter] = LetterStatus::PRESENT;
                 return [
                     'letter' => $letter,
                     'status' => LetterStatus::PRESENT,
                 ];
             }
 
-            $this->keyStatusses[$letter] = LetterStatus::ABSENCE;
+            $this->keyStatuses[$letter] = LetterStatus::ABSENCE;
             return [
                 'letter' => $letter,
                 'status' => LetterStatus::ABSENCE,
@@ -63,6 +66,8 @@ class Game extends Component
         })->all();
 
         if (count($this->guesses) === 6 && $this->status !== GameStatus::WON) {
+            $this->dispatchBrowserEvent('played', ['status' => 'lost']);
+
             $this->status = GameStatus::LOST;
         }
 

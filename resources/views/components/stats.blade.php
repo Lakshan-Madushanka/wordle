@@ -1,4 +1,4 @@
-<div x-data="{ modelOpen: false }" @display-stats.window="modelOpen = true">
+<div x-data="{ modelOpen: false }" @display-stats.window="modelOpen = true" >
     <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0">
             <div x-cloak @click="modelOpen = false" x-show="modelOpen"
@@ -34,20 +34,26 @@
 
                     <div class="flex space-x-4 mt-2 mb-4 justify-center">
                         <div class="flex flex-col justify-center items-center">
-                            <p class="text-4xl">0</p>
+                            <p class="text-4xl" x-text="stats.played"></p>
                             <p class="text-[10px]">Played</p>
                         </div>
                         <div class="flex flex-col justify-center items-center">
-                            <p class="text-4xl">0</p>
-                            <p class="text-[10px]">Played</p>
+                            <p
+                                x-text="
+                                    percentage =  Math.ceil((stats.won/stats.played) * 100);
+                                    if (isNaN(percentage)) {
+                                        return 0;
+                                    }
+                                    return percentage;
+                                    "
+                                class="text-4xl"
+                            >
+                            </p>
+                            <p class="text-[10px]">Win %</p>
                         </div>
                         <div class="flex flex-col justify-center items-center">
-                            <p class="text-4xl">0</p>
-                            <p class="text-[10px]">Played</p>
-                        </div>
-                        <div class="flex flex-col justify-center items-center">
-                            <p class="text-4xl">0</p>
-                            <p class="text-[10px]">Played</p>
+                            <p class="text-4xl" x-text="stats.won"></p>
+                            <p class="text-[10px]">Won</p>
                         </div>
                     </div>
 

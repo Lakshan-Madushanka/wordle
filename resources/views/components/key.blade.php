@@ -1,6 +1,6 @@
 @props([
         'value' => "",
-         'keyStatusses' => [],
+         'keyStatuses' => [],
     ])
 
 <div
@@ -8,7 +8,7 @@
     @click="$dispatch('key-clicked', '{{$value}}')"
     {{
         $attributes->class([
-            $keyStatusses[$value] ?? "",
+            $keyStatuses[$value] ?? "",
      "bg-gray-200 w-6 h-6 sm:w-12 sm:h-12 rounded-md flex justify-center items-center uppercase hover:cursor-pointer"
      ])
      }}
