@@ -1,6 +1,11 @@
+@props([
+    'checkedStatus' => 'false',
+    'switchToggleAction' => ''
+    ])
+
 <div
     class="flex items-center justify-center"
-    x-data="{ checked: $persist($store.darkMode.on).as('darkMode_on') }"
+    x-data="{ checked: {{$checkedStatus}} }"
 >
     <button
         type="button"
@@ -11,8 +16,9 @@
         class="relative inline-flex flex-shrink-0 h-[28px] w-[64px] border-2 border-transparent rounded-full cursor-pointer transition-colors
         ease-in-out duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
         @click="
-        $store.darkMode.toggle();
-        checked = ! checked";
+        {{$switchToggleAction}}
+        checked = ! checked;
+        "
     >
         <span class="sr-only">
             Some label for screen readers only

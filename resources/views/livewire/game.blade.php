@@ -45,9 +45,7 @@
 
     <div class="flex flex-col space-y-4 justify-center items-center" wire:loading.class="opacity-40"
          wire:target="replay">
-        <div @class
-
-    ([
+        <div @class([
                  "mt-4",
                  "py-2",
                  "px-8",
@@ -90,10 +88,8 @@
         <x-spinner class="w-24 h-24"/>
     </div>
 
-    <x-stats/>
-    <x-settings/>
-    @if(! App::isProduction())
-        <x-testing/>
-    @endif
+    @include('includes.settings')
+    @include('includes.stats')
+    @includeUnless(App::isProduction(), 'includes.testing')
 </div>
 
