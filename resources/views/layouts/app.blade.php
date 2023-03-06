@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data :class="{'dark': $store.darkMode.on}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
 
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased min-h-screen dark:bg-gray-900">
 <main>
     {{ $slot }}
 </main>

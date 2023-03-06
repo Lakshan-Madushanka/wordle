@@ -10,8 +10,18 @@ import persist from '@alpinejs/persist'
 
 Alpine.plugin(persist)
 
-
 window.Alpine = Alpine
+
+document.addEventListener('alpine:init', () => {
+    Alpine.store('darkMode', {
+        on: Alpine.$persist(false).as('darkMode_on'),
+
+        toggle() {
+            this.on = !this.on
+        }
+    })
+})
+
 document.addEventListener('alpine:init', () => {
     Alpine.data('currentGuess', () => ({
         guess: [],

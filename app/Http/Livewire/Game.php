@@ -23,10 +23,15 @@ class Game extends Component
     public function mount()
     {
         $this->status = GameStatus::ACTIVE;
+        $this->word = $this->generateSecretWord();
+    }
 
+    public function generateSecretWord(): string
+    {
         /** @var WordGenerator $wodGenerator */
         $wodGenerator = App::make(WordGenerator::class) ;
-        $this->word = $wodGenerator->generate(5);
+
+        return $wodGenerator->generate(5);
     }
 
     public function submitGuess(array $guess): void
@@ -76,7 +81,15 @@ class Game extends Component
 
             $this->status = GameStatus::LOST;
         }
+    }
 
+
+    public function replay(): void
+    {
+        $this->word = $this->generateSecretWord();
+        $this->guesses = [];
+        $this->keyStatuses= [];
+        $this->status = GameStatus::ACTIVE;
     }
 
     public function render(): Factory|View|Application

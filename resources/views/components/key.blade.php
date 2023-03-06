@@ -9,7 +9,7 @@
     {{
         $attributes->class([
             $keyStatuses[$value] ?? "",
-     "bg-gray-200 w-6 h-6 sm:w-12 sm:h-12 rounded-md flex justify-center items-center uppercase hover:cursor-pointer"
+     "bg-gray-200 w-8 h-8 sm:w-12 sm:h-12 rounded-md flex justify-center items-center uppercase hover:cursor-pointer"
      ])
      }}
 >
