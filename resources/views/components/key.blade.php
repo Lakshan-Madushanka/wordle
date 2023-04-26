@@ -1,6 +1,6 @@
 @props([
         'value' => "",
-         'keyStatuses' => [],
+        'keyStatuses' => [],
     ])
 
 <div

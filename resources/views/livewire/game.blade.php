@@ -15,8 +15,9 @@
 >
     <header class="flex justify-between items-center p-4 border-b-2 border-gray-300">
         <div class="dark:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                 stroke="currentColor" class="w-6 h-6">
+            <svg x-data @click="$dispatch('display-help')" xmlns="http://www.w3.org/2000/svg" fill="none"
+                 viewBox="0 0 24 24" stroke-width="1.5"
+                 stroke="currentColor" class="w-6 h-6 hover:cursor-pointer">
                 <path stroke-linecap="round" stroke-linejoin="round"
                       d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/>
             </svg>
@@ -43,23 +44,35 @@
         </div>
     </header>
 
-    <div class="flex flex-col space-y-4 justify-center items-center" wire:loading.class="opacity-40"
+    <div class="flex flex-col space-y-4 justify-center items-center relative" wire:loading.class="opacity-40"
          wire:target="replay">
         <div @class([
+                 "absolute",
+                 "border-4",
+                 "border-white",
+                 "border-dotted",
+                 "rounded",
+                 "flex",
+                 "justify-center",
+                 "items-center",
+                 "top-[2rem]",
                  "mt-4",
-                 "py-2",
+                 "py-8",
                  "px-8",
-                 "bg-purple-600",
+                 "bg-[red]" => $status === GameStatus::LOST,
+                 "bg-purple-600" => $status === GameStatus::WON,
                  "text-white",
-                 "h-10",
+                 "h-12",
+                 "align-middle",
                  "shadow-2xl",
+                 "shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]",
                  "invisible" => $status === GameStatus::ACTIVE,
            ])>
-            <span class="mr-2">
+            <span class="mr-2 text-xl">
                 @if($status === GameStatus::LOST)
-                    Lost word is <span class="font-bold uppercase">{{$word}}</span>
+                    <span class="text-2xl"> 😭 </span> Lost word is <span class="font-bold uppercase">{{$word}}</span>
                 @elseif($status === GameStatus::WON)
-                    Won
+                    <span class="text-2xl">🏆</span> Won
                 @endif
             </span>
             <a href="#" class="font-medium underline hover:no-underline" wire:click="replay">replay</a>
@@ -88,6 +101,7 @@
         <x-spinner class="w-24 h-24"/>
     </div>
 
+    @include('includes.help')
     @include('includes.settings')
     @include('includes.stats')
     @includeUnless(App::isProduction(), 'includes.testing')

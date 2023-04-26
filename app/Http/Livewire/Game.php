@@ -36,7 +36,6 @@ class Game extends Component
 
     public function submitGuess(array $guess): void
     {
-
         if (count($this->guesses) === 6 | $this->status !== GameStatus::ACTIVE) {
             return;
         }
