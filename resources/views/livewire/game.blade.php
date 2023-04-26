@@ -44,8 +44,7 @@
         </div>
     </header>
 
-    <div class="flex flex-col space-y-4 justify-center items-center relative" wire:loading.class="opacity-40"
-         wire:target="replay">
+    <div class="flex flex-col space-y-4 justify-center items-center relative"  wire:loading.class="opacity-40">
         <div @class([
                  "absolute",
                  "border-4",
@@ -97,8 +96,8 @@
         @include('includes.keyboard', ['keyStatuses' => $keyStatuses])
     </div>
 
-    <div class="absolute top-[16rem] flex w-full justify-center items-center" wire:loading.flex wire:target="replay">
-        <x-spinner class="w-24 h-24"/>
+    <div class="absolute top-[16rem] flex w-full justify-center items-center" wire:loading.flex >
+        <x-spinner class="w-24 h-24" wire:loading.delay/>
     </div>
 
     @include('includes.help')
