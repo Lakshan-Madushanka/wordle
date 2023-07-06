@@ -12,40 +12,39 @@ Alpine.plugin(persist)
 
 window.Alpine = Alpine
 
-document.addEventListener('alpine:init', () => {
-    Alpine.store('darkMode', {
-        on: Alpine.$persist(false).as('darkMode_on'),
+Alpine.store('darkMode', {
+    on: Alpine.$persist(false).as('darkMode_on'),
 
-        toggle() {
-            this.on = !this.on
+    toggle() {
+        this.on = !this.on
+    }
+});
+
+Alpine.data('currentGuess', (initialGuessState = []) => ({
+    guess: initialGuessState,
+
+    inputKey($key) {
+        let noOfGuessedLetters = this.guess.length;
+
+        if ($key === 'Backspace') {
+            this.guess.pop();
+            return;
         }
-    })
-})
 
-document.addEventListener('alpine:init', () => {
-    Alpine.data('currentGuess', () => ({
-        guess: [],
+        if ($key === 'Enter' && noOfGuessedLetters === 5) {
+            Livewire.emit('submitGuess', this.guess);
+            return;
+        }
 
-        inputKey($key) {
-            let noOfGuessedLetters = this.guess.length;
-            if ($key === 'Backspace') {
-                this.guess.pop();
-                return;
-            }
+        const validLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+        $key = $key.toLowerCase();
 
-            if ($key === 'Enter' && noOfGuessedLetters === 5) {
-                Livewire.emit('submitGuess', this.guess);
-                return;
-            }
-            const validLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-            $key = $key.toLowerCase();
+        if (validLetters.includes($key) && this.guess.length < 5) {
+            this.guess.push($key)
+        }
+    },
+}));
 
-            if (validLetters.includes($key) && this.guess.length < 5) {
-                this.guess.push($key)
-            }
-        },
-    }))
-})
 
 Alpine.start()
 
