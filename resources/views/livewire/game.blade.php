@@ -1,6 +1,7 @@
 @php
     use App\Enums\GameStatus;
     use Illuminate\Support\Facades\App;
+    use Illuminate\Support\Str;
 @endphp
 
 <div
@@ -44,7 +45,7 @@
         </div>
     </header>
 
-    <div class="flex flex-col space-y-4 justify-center items-center relative"  wire:loading.class="opacity-40">
+    <div class="flex flex-col space-y-4 justify-center items-center relative" wire:loading.class="opacity-40">
         <div @class([
                  "absolute",
                  "border-4",
@@ -74,11 +75,11 @@
                     <span class="text-2xl">🏆</span> Won
                 @endif
             </span>
-            <a href="#" class="font-medium underline hover:no-underline" wire:click="replay">replay</a>
+            <a href="#" class="font-medium underline hover:no-underline cursor-pointer" wire:click="replay">replay</a>
         </div>
 
         @foreach($guesses as $guess)
-            <x-row.past :guess="$guess"/>
+            <x-row.past :guess="$guess" wire:key="{{Str::random()}}"/>
         @endforeach
 
         @if(count($guesses) < 6)
@@ -90,13 +91,13 @@
         @endif
 
         @for($i = count($guesses); $i < 5; $i++)
-            <x-row.future/>
+            <x-row.future wire:key="{{Str::random()}}"/>
         @endfor
 
         @include('includes.keyboard', ['keyStatuses' => $keyStatuses])
     </div>
 
-    <div class="absolute top-[16rem] flex w-full justify-center items-center" wire:loading.flex >
+    <div class="absolute top-[16rem] flex w-full justify-center items-center" wire:loading.flex>
         <x-spinner class="w-24 h-24" wire:loading.delay/>
     </div>
 

@@ -1,6 +1,6 @@
 @props(['guess'])
 
-<div class="flex space-x-4">
+<div {{$attributes->merge(['class' => 'flex space-x-4'])}}>
     <div
         class="flex justify-center items-center w-12 h-12 border border-gray-300 uppercase font-bold text-4xl {{$guess[0]['status']}}">
         {{$guess[0]['letter']}}
