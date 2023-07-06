@@ -2,7 +2,10 @@
     'modelOpenStatus' => 'false'
     ])
 
-<div x-data="{ modelOpen: {{$modelOpenStatus}} }"  {{$attributes->merge()}}>
+<div
+    x-data="{ modelOpen: {{$modelOpenStatus}} }" {{$attributes->merge()}}
+    @keyup.escape.window.stop="modelOpen = false"
+>
     <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
          aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0">
@@ -26,7 +29,8 @@
                  class="dark:bg-black dark:text-white inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl"
             >
                 <div class="flex items-center justify-end space-x-4">
-                    <button @click="modelOpen = false" class="text-gray-600 dark:text-white focus:outline-none hover:text-gray-700">
+                    <button @click="modelOpen = false"
+                            class="text-gray-600 dark:text-white focus:outline-none hover:text-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                              stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
