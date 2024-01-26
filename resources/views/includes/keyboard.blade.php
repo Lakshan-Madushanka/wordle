@@ -28,7 +28,7 @@
         <x-key class="py-4 px-8 sm:px-0 sm:py-0 w-14 sm:w-28" value="Enter"/>
         <x-key value="z" :keyStatuses="$keyStatuses"/>
         <x-key value="x" :keyStatuses="$keyStatuses"/>
-        <x-key value="x" :keyStatuses="$keyStatuses"/>
+        <x-key value="c" :keyStatuses="$keyStatuses"/>
         <x-key value="v" :keyStatuses="$keyStatuses"/>
         <x-key value="b" :keyStatuses="$keyStatuses"/>
         <x-key value="n" :keyStatuses="$keyStatuses"/>
