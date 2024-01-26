@@ -12,6 +12,7 @@
      "bg-gray-200 w-8 h-8 sm:w-12 sm:h-12 rounded-md flex justify-center items-center uppercase hover:cursor-pointer"
      ])
      }}
+    id="key-{{$value}}"
 >
     @if($slot->isEmpty())
         {{$value}}
