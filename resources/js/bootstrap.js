@@ -52,6 +52,16 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+window.addEventListener('keydown', (event) => {
+    let selector = `#key-${event.key}`
+    const elm = document.querySelector(selector);
+    const styleClass= 'animate-ping'
+    elm.classList.add(styleClass)
+
+    setTimeout(() => {
+        elm.classList.remove(styleClass);
+    }, 100)
+})
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

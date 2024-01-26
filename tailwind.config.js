@@ -9,5 +9,8 @@ module.exports = {
     theme: {
         extend: {},
     },
+    safelist: [
+      "animate-ping"
+    ],
     plugins: [],
 }
