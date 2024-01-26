@@ -24,8 +24,8 @@
             </svg>
         </div>
 
-        <div class="text-4xl font-extrabold">
-            <h1 class="dark:text-white">Wordvel</h1>
+        <div class="text-4xl font-bold">
+            <h1 class="dark:text-white">WORDLE</h1>
         </div>
 
         <div class="flex space-x-2 dark:text-white">
