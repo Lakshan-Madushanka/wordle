@@ -45,6 +45,6 @@ you can easily enable it with a simple switch.
 We welcome all quality pull requests. While it's not mandatory, we highly encourage contributors to include test cases.
 
 ## License
-Comments is an open-source project licensed under the [MIT](https://opensource.org/licenses/MIT) license.
+This is an open-source project licensed under the [MIT](https://opensource.org/licenses/MIT) license.
 
 
