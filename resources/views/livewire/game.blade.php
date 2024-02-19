@@ -104,6 +104,6 @@
     @include('includes.help')
     @include('includes.settings')
     @include('includes.stats')
-    @includeUnless(App::isProduction(), 'includes.testing')
+{{--    @includeUnless(App::isProduction(), 'includes.testing')--}}
 </div>
 
