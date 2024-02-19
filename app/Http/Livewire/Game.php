@@ -14,8 +14,11 @@ use Livewire\Component;
 class Game extends Component
 {
     public array $guesses = [];
+
     public string $word;
+
     public string $status;
+
     public array $keyStatuses = [];
 
     protected $listeners = ['submitGuess'];
@@ -29,7 +32,7 @@ class Game extends Component
     public function generateSecretWord(): string
     {
         /** @var WordGenerator $wodGenerator */
-        $wodGenerator = App::make(WordGenerator::class) ;
+        $wodGenerator = App::make(WordGenerator::class);
 
         return $wodGenerator->generate(5);
     }
@@ -48,11 +51,11 @@ class Game extends Component
             $this->status = GameStatus::WON;
         }
 
-
         $this->guesses[] = collect($guess)->map(function ($letter, $index) use (&$word) {
             // Check letter contains in the correct position of the word
             if ($letter === $word[$index]) {
                 $this->keyStatuses[$letter] = LetterStatus::CORRECT;
+
                 return [
                     'letter' => $letter,
                     'status' => LetterStatus::CORRECT,
@@ -62,6 +65,7 @@ class Game extends Component
             // Check letter contains in word (incorrect position)
             if (in_array($letter, $word, true)) {
                 $this->keyStatuses[$letter] = LetterStatus::PRESENT;
+
                 return [
                     'letter' => $letter,
                     'status' => LetterStatus::PRESENT,
@@ -69,6 +73,7 @@ class Game extends Component
             }
 
             $this->keyStatuses[$letter] = LetterStatus::ABSENCE;
+
             return [
                 'letter' => $letter,
                 'status' => LetterStatus::ABSENCE,
@@ -82,12 +87,11 @@ class Game extends Component
         }
     }
 
-
     public function replay(): void
     {
         $this->word = $this->generateSecretWord();
         $this->guesses = [];
-        $this->keyStatuses= [];
+        $this->keyStatuses = [];
         $this->status = GameStatus::ACTIVE;
     }
 

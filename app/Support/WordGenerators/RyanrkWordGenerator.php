@@ -3,11 +3,10 @@
 namespace App\Support\WordGenerators;
 
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 class RyanrkWordGenerator extends WordGenerator
 {
-    private const URL = "https://random-word.ryanrk.com/api";
+    private const URL = 'https://random-word.ryanrk.com/api';
 
     public function __construct(private readonly string $language = 'en')
     {

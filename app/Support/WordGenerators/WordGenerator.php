@@ -4,7 +4,7 @@ namespace App\Support\WordGenerators;
 
 abstract class WordGenerator
 {
-     const ALLOWED_LETTERS = [
+    const ALLOWED_LETTERS = [
         'a',
         'b',
         'c',
@@ -33,18 +33,18 @@ abstract class WordGenerator
         'z',
     ];
 
-     abstract public function generateFromServer(): string;
+    abstract public function generateFromServer(): string;
 
-     final public function generate(int $length = 5): string
-     {
-         $word = $this->generateFromServer($length);
+    final public function generate(int $length = 5): string
+    {
+        $word = $this->generateFromServer($length);
 
-         while (! $this->validateWord($word)) {
-             $word =  $this->generate($length);
-         }
+        while (! $this->validateWord($word)) {
+            $word = $this->generate($length);
+        }
 
-         return $word;
-     }
+        return $word;
+    }
 
     public function validateWord(string $word): bool
     {

@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(WordGenerator::class, function ($app) {
             $locale = $app->getLocale();
+
             return new RyanrkWordGenerator($locale);
         });
     }
