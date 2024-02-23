@@ -14,7 +14,7 @@
                 }
            "
 >
-    <header class="flex justify-between items-center p-4 border-b-2 border-gray-300">
+    <header class="flex justify-between items-center p-4 border-b-2 border-gray-300 relative">
         <div class="dark:text-white">
             <svg x-data @click="$dispatch('display-help')" xmlns="http://www.w3.org/2000/svg" fill="none"
                  viewBox="0 0 24 24" stroke-width="1.5"
@@ -45,9 +45,9 @@
         </div>
     </header>
 
-    <div class="flex flex-col space-y-4 justify-center items-center relative" wire:loading.class="opacity-40">
+    <div class="w-full min-h-[calc(100vh-75px)] flex justify-center items-center absolute top-0 left-0">
         <div @class([
-                 "absolute",
+                 "z-10",
                  "border-4",
                  "border-white",
                  "border-dotted",
@@ -55,28 +55,31 @@
                  "flex",
                  "justify-center",
                  "items-center",
-                 "top-[2rem]",
                  "mt-4",
-                 "py-8",
-                 "px-8",
+                 "!p-4",
                  "bg-[red]" => $status === GameStatus::LOST,
                  "bg-purple-600" => $status === GameStatus::WON,
                  "text-white",
-                 "h-12",
                  "align-middle",
                  "shadow-2xl",
                  "shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]",
                  "invisible" => $status === GameStatus::ACTIVE,
            ])>
-            <span class="mr-2 text-xl">
+            <span class="text-xl flex justify-center items-center">
                 @if($status === GameStatus::LOST)
-                    <span class="text-2xl"> 😭 </span> Lost word is <span class="font-bold uppercase">{{$word}}</span>
+                    <span class="text-2xl">😭</span> <span>Lost word is</span> <span
+                        class="font-bold uppercase ml-1">{{$word}}</span>
                 @elseif($status === GameStatus::WON)
-                    <span class="text-2xl">🏆</span> Won
+                    <span class="text-2xl ">🏆</span> Won
                 @endif
             </span>
-            <a href="#" class="font-medium underline hover:no-underline cursor-pointer" wire:click="replay">replay</a>
+            <a href="#" class="font-medium underline hover:no-underline cursor-pointer ml-1"
+               wire:click="replay">replay</a>
         </div>
+    </div>
+
+    <div class="flex flex-col min-h-[calc(100vh-75px)] gap-y-2 justify-center items-center"
+         wire:loading.class="opacity-40">
 
         @foreach($guesses as $guess)
             <x-row.past :guess="$guess" wire:key="{{Str::random()}}"/>
@@ -94,7 +97,9 @@
             <x-row.future wire:key="{{Str::random()}}"/>
         @endfor
 
-        @include('includes.keyboard', ['keyStatuses' => $keyStatuses])
+        <div class="mt-2">
+            @include('includes.keyboard', ['keyStatuses' => $keyStatuses])
+        </div>
     </div>
 
     <div class="absolute top-[16rem] flex w-full justify-center items-center" wire:loading.flex>
@@ -104,6 +109,6 @@
     @include('includes.help')
     @include('includes.settings')
     @include('includes.stats')
-{{--    @includeUnless(App::isProduction(), 'includes.testing')--}}
+    {{--    @includeUnless(App::isProduction(), 'includes.testing')--}}
 </div>
 

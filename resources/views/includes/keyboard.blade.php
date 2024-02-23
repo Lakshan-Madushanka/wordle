@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center bottom-12 space-y-3 !mt-8">
+<div class="flex flex-col items-center space-y-2">
     <div class="flex items-center space-x-1">
         <x-key value="q" :keyStatuses="$keyStatuses"/>
         <x-key value="w" :keyStatuses="$keyStatuses"/>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="flex items-center space-x-1">
-        <x-key class="py-4 px-8 sm:px-0 sm:py-0 w-14 sm:w-28" value="Enter"/>
+        <x-key class="!py-4 !px-8 sm:!px-0 sm:!py-0 !w-14 sm:!w-28" value="Enter"/>
         <x-key value="z" :keyStatuses="$keyStatuses"/>
         <x-key value="x" :keyStatuses="$keyStatuses"/>
         <x-key value="c" :keyStatuses="$keyStatuses"/>
