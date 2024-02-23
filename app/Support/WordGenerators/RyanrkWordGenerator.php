@@ -14,7 +14,7 @@ class RyanrkWordGenerator extends WordGenerator
 
     public function generateFromServer(int $length = 5): string
     {
-        $word = Http::timeout(5)->withUrlParameters([
+        $word = Http::withUrlParameters([
             'endPoint' => self::URL,
             'language' => $this->language,
             'length' => $length,
